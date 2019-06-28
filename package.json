@@ -5,16 +5,24 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/**/*.js",
-    "test": "mocha tests/**/*.spec.js --require babel-register",
-    "test:tdd": "mocha tests/**/*.spec.js --require babel-register --watch",
+    "clear": "rimraf lib",
+    "build": "npm run clear && ./node_modules/.bin/babel --out-dir lib src",
+    "build:watch": "npm run build -- --watch",
+    "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register",
+    "test:tdd": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register --watch",
     "test:coverage": "nyc npm test"
   },
   "nyc": {
     "functions": 80,
     "lines": 80,
     "check-coverage": true,
-    "reporter": ["text", "html"],
-    "exclude": ["tests/**"]
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
   },
   "repository": {
     "type": "git",
@@ -31,6 +39,7 @@
   },
   "homepage": "https://github.com/Razborges/js-tdd-course#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
@@ -39,7 +48,12 @@
     "eslint-plugin-import": "^2.17.3",
     "husky": "^2.4.0",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1"
+    "node-fetch": "^2.6.0",
+    "nyc": "^14.1.1",
+    "rimraf": "^2.6.3",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0",
+    "sinon-stub-promise": "^4.0.0"
   },
   "husky": {
     "hooks": {
